@@ -151,7 +151,7 @@ const menuPhotos = [
   { src: tandooriImg, alt: "Smoky tandoori chicken fresh from the oven", afterIndex: 7 },
 ];
 
-const MenuCategoryCard = ({ cat }: { cat: MenuCategory }) => (
+const MenuCategoryCard = ({ cat }: { cat: MenuCategoryData }) => (
   <div>
     <div className="flex items-center gap-2 mb-1">
       <h3 className="font-display text-2xl text-foreground">{cat.name}</h3>
