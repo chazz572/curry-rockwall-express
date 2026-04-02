@@ -1,8 +1,4 @@
 import { Leaf } from "lucide-react";
-import samosasImg from "@/assets/menu-samosas.jpg";
-import biryaniImg from "@/assets/menu-biryani.jpg";
-import butterChickenImg from "@/assets/menu-butter-chicken.jpg";
-import tandooriImg from "@/assets/menu-tandoori.jpg";
 
 interface MenuItemData {
   name: string;
@@ -166,25 +162,6 @@ const MenuCategoryCard = ({ cat }: { cat: MenuCategoryData }) => (
   </div>
 );
 
-const PhotoBanner = ({ images }: { images: { src: string; alt: string }[] }) => (
-  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 my-14 px-2">
-    {images.map((img) => (
-      <div key={img.alt} className="group relative rounded-2xl overflow-hidden border border-border/50" style={{ boxShadow: 'var(--warm-glow)' }}>
-        <div className="aspect-[4/3]">
-          <img
-            src={img.src}
-            alt={img.alt}
-            loading="lazy"
-            width={640}
-            height={480}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-          />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-foreground/30 to-transparent pointer-events-none" />
-      </div>
-    ))}
-  </div>
-);
 
 // Group categories into sections with photo breaks
 const sections = [
@@ -201,36 +178,10 @@ const MenuSection = () => (
         <h2 className="font-display text-4xl md:text-5xl text-foreground">The Menu</h2>
         <p className="text-muted-foreground mt-3">Vegan options available · Served fresh daily</p>
       </div>
-      <div className="max-w-5xl mx-auto">
-        {/* Section 1: Appetizers */}
-        <div className="grid md:grid-cols-2 gap-x-12 gap-y-14">
-          {sections[0].cats.map((cat) => (
-            <MenuCategoryCard key={cat.name} cat={cat} />
-          ))}
-        </div>
-
-        <PhotoBanner images={[
-          { src: samosasImg, alt: "Crispy vegetable samosas with green chutney" },
-          { src: biryaniImg, alt: "Aromatic chicken biryani in a copper pot" },
-          { src: butterChickenImg, alt: "Butter chicken with fresh naan bread" },
-          { src: tandooriImg, alt: "Smoky tandoori chicken fresh from the oven" },
-        ]} />
-
-        {/* Section 2: Entrees */}
-        <div className="grid md:grid-cols-2 gap-x-12 gap-y-14">
-          {sections[1].cats.map((cat) => (
-            <MenuCategoryCard key={cat.name} cat={cat} />
-          ))}
-        </div>
-
-        <div className="my-10" />
-
-        {/* Section 3: Breads, Tandoor, Desserts, Drinks */}
-        <div className="grid md:grid-cols-2 gap-x-12 gap-y-14">
-          {sections[2].cats.map((cat) => (
-            <MenuCategoryCard key={cat.name} cat={cat} />
-          ))}
-        </div>
+      <div className="grid md:grid-cols-2 gap-x-12 gap-y-14 max-w-5xl mx-auto">
+        {categories.map((cat) => (
+          <MenuCategoryCard key={cat.name} cat={cat} />
+        ))}
       </div>
     </div>
   </section>
