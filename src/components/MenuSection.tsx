@@ -17,7 +17,7 @@ interface MenuCategoryData {
   items: MenuItemData[];
 }
 
-const categories: MenuCategory[] = [
+const categories: MenuCategoryData[] = [
   {
     name: "Vegetarian Appetizers",
     veg: true,
