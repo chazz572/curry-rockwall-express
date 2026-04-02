@@ -174,8 +174,8 @@ const MenuCategoryCard = ({ cat }: { cat: MenuCategoryData }) => (
 );
 
 const PhotoCard = ({ src, alt }: { src: string; alt: string }) => (
-  <div className="rounded-xl overflow-hidden warm-shadow md:col-span-2 max-w-md mx-auto w-full">
-    <img src={src} alt={alt} loading="lazy" width={640} height={640} className="w-full h-64 object-cover" />
+  <div className="rounded-xl overflow-hidden warm-shadow">
+    <img src={src} alt={alt} loading="lazy" width={640} height={640} className="w-full h-48 object-cover rounded-xl" />
   </div>
 );
 
