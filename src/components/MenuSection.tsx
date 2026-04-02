@@ -144,13 +144,6 @@ const categories: MenuCategoryData[] = [
   },
 ];
 
-const menuPhotos = [
-  { src: samosasImg, alt: "Crispy vegetable samosas with green chutney", afterIndex: 1 },
-  { src: biryaniImg, alt: "Aromatic chicken biryani in a copper pot", afterIndex: 3 },
-  { src: butterChickenImg, alt: "Butter chicken with fresh naan bread", afterIndex: 5 },
-  { src: tandooriImg, alt: "Smoky tandoori chicken fresh from the oven", afterIndex: 7 },
-];
-
 const MenuCategoryCard = ({ cat }: { cat: MenuCategoryData }) => (
   <div>
     <div className="flex items-center gap-2 mb-1">
@@ -173,40 +166,64 @@ const MenuCategoryCard = ({ cat }: { cat: MenuCategoryData }) => (
   </div>
 );
 
-const PhotoCard = ({ src, alt }: { src: string; alt: string }) => (
-  <div className="rounded-xl overflow-hidden warm-shadow">
-    <img src={src} alt={alt} loading="lazy" width={640} height={640} className="w-full h-48 object-cover rounded-xl" />
+const PhotoBanner = ({ images }: { images: { src: string; alt: string }[] }) => (
+  <div className="grid grid-cols-2 md:grid-cols-4 gap-3 my-10">
+    {images.map((img) => (
+      <div key={img.alt} className="rounded-xl overflow-hidden warm-shadow aspect-square">
+        <img src={img.src} alt={img.alt} loading="lazy" width={640} height={640} className="w-full h-full object-cover" />
+      </div>
+    ))}
   </div>
 );
 
-const MenuSection = () => {
-  // Build grid items: interleave category pairs with photos
-  const gridItems: React.ReactNode[] = [];
+// Group categories into sections with photo breaks
+const sections = [
+  { cats: categories.slice(0, 4) },   // Appetizers + Rice + Specials
+  { cats: categories.slice(4, 6) },   // Veg & Non-Veg Entrees
+  { cats: categories.slice(6, 10) },  // Breads, Tandoor, Desserts, Drinks
+];
 
-  categories.forEach((cat, i) => {
-    gridItems.push(<MenuCategoryCard key={cat.name} cat={cat} />);
-
-    // After certain pairs, insert a photo
-    const photo = menuPhotos.find((p) => p.afterIndex === i);
-    if (photo) {
-      gridItems.push(<PhotoCard key={photo.alt} src={photo.src} alt={photo.alt} />);
-    }
-  });
-
-  return (
-    <section id="menu" className="py-20 bg-section-alt">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-14">
-          <p className="text-primary font-medium tracking-[0.2em] uppercase text-sm mb-2">Our Specialties</p>
-          <h2 className="font-display text-4xl md:text-5xl text-foreground">The Menu</h2>
-          <p className="text-muted-foreground mt-3">Vegan options available · Served fresh daily</p>
+const MenuSection = () => (
+  <section id="menu" className="py-20 bg-section-alt">
+    <div className="container mx-auto px-4">
+      <div className="text-center mb-14">
+        <p className="text-primary font-medium tracking-[0.2em] uppercase text-sm mb-2">Our Specialties</p>
+        <h2 className="font-display text-4xl md:text-5xl text-foreground">The Menu</h2>
+        <p className="text-muted-foreground mt-3">Vegan options available · Served fresh daily</p>
+      </div>
+      <div className="max-w-5xl mx-auto">
+        {/* Section 1: Appetizers */}
+        <div className="grid md:grid-cols-2 gap-x-12 gap-y-14">
+          {sections[0].cats.map((cat) => (
+            <MenuCategoryCard key={cat.name} cat={cat} />
+          ))}
         </div>
-        <div className="grid md:grid-cols-2 gap-x-12 gap-y-14 max-w-5xl mx-auto">
-          {gridItems}
+
+        <PhotoBanner images={[
+          { src: samosasImg, alt: "Crispy vegetable samosas with green chutney" },
+          { src: biryaniImg, alt: "Aromatic chicken biryani in a copper pot" },
+          { src: butterChickenImg, alt: "Butter chicken with fresh naan bread" },
+          { src: tandooriImg, alt: "Smoky tandoori chicken fresh from the oven" },
+        ]} />
+
+        {/* Section 2: Entrees */}
+        <div className="grid md:grid-cols-2 gap-x-12 gap-y-14">
+          {sections[1].cats.map((cat) => (
+            <MenuCategoryCard key={cat.name} cat={cat} />
+          ))}
+        </div>
+
+        <div className="my-10" />
+
+        {/* Section 3: Breads, Tandoor, Desserts, Drinks */}
+        <div className="grid md:grid-cols-2 gap-x-12 gap-y-14">
+          {sections[2].cats.map((cat) => (
+            <MenuCategoryCard key={cat.name} cat={cat} />
+          ))}
         </div>
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
 export default MenuSection;
