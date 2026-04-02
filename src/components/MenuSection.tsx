@@ -4,20 +4,20 @@ import biryaniImg from "@/assets/menu-biryani.jpg";
 import butterChickenImg from "@/assets/menu-butter-chicken.jpg";
 import tandooriImg from "@/assets/menu-tandoori.jpg";
 
-interface MenuItem {
+interface MenuItemData {
   name: string;
   price: string;
   desc?: string;
 }
 
-interface MenuCategory {
+interface MenuCategoryData {
   name: string;
   note?: string;
   veg?: boolean;
-  items: MenuItem[];
+  items: MenuItemData[];
 }
 
-const categories: MenuCategory[] = [
+const categories: MenuCategoryData[] = [
   {
     name: "Vegetarian Appetizers",
     veg: true,
@@ -151,7 +151,7 @@ const menuPhotos = [
   { src: tandooriImg, alt: "Smoky tandoori chicken fresh from the oven", afterIndex: 7 },
 ];
 
-const MenuCategoryCard = ({ cat }: { cat: MenuCategory }) => (
+const MenuCategoryCard = ({ cat }: { cat: MenuCategoryData }) => (
   <div>
     <div className="flex items-center gap-2 mb-1">
       <h3 className="font-display text-2xl text-foreground">{cat.name}</h3>
@@ -174,8 +174,8 @@ const MenuCategoryCard = ({ cat }: { cat: MenuCategory }) => (
 );
 
 const PhotoCard = ({ src, alt }: { src: string; alt: string }) => (
-  <div className="rounded-xl overflow-hidden warm-shadow md:col-span-2 max-w-md mx-auto w-full">
-    <img src={src} alt={alt} loading="lazy" width={640} height={640} className="w-full h-64 object-cover" />
+  <div className="rounded-xl overflow-hidden warm-shadow">
+    <img src={src} alt={alt} loading="lazy" width={640} height={640} className="w-full h-48 object-cover rounded-xl" />
   </div>
 );
 
