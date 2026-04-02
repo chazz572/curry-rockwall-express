@@ -4,17 +4,17 @@ import biryaniImg from "@/assets/menu-biryani.jpg";
 import butterChickenImg from "@/assets/menu-butter-chicken.jpg";
 import tandooriImg from "@/assets/menu-tandoori.jpg";
 
-interface MenuItem {
+interface MenuItemData {
   name: string;
   price: string;
   desc?: string;
 }
 
-interface MenuCategory {
+interface MenuCategoryData {
   name: string;
   note?: string;
   veg?: boolean;
-  items: MenuItem[];
+  items: MenuItemData[];
 }
 
 const categories: MenuCategory[] = [
