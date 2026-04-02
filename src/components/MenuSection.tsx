@@ -167,10 +167,20 @@ const MenuCategoryCard = ({ cat }: { cat: MenuCategoryData }) => (
 );
 
 const PhotoBanner = ({ images }: { images: { src: string; alt: string }[] }) => (
-  <div className="grid grid-cols-2 md:grid-cols-4 gap-3 my-10">
+  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 my-14 px-2">
     {images.map((img) => (
-      <div key={img.alt} className="rounded-xl overflow-hidden warm-shadow aspect-square">
-        <img src={img.src} alt={img.alt} loading="lazy" width={640} height={640} className="w-full h-full object-cover" />
+      <div key={img.alt} className="group relative rounded-2xl overflow-hidden border border-border/50" style={{ boxShadow: 'var(--warm-glow)' }}>
+        <div className="aspect-[4/3]">
+          <img
+            src={img.src}
+            alt={img.alt}
+            loading="lazy"
+            width={640}
+            height={480}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-foreground/30 to-transparent pointer-events-none" />
       </div>
     ))}
   </div>
