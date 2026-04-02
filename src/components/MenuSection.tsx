@@ -143,17 +143,17 @@ const categories: MenuCategoryData[] = [
 const MenuCategoryCard = ({ cat }: { cat: MenuCategoryData }) => (
   <div>
     <div className="flex items-center gap-2 mb-1">
-      <h3 className="font-display text-2xl text-foreground">{cat.name}</h3>
-      {cat.veg && <Leaf className="w-5 h-5 text-primary" />}
+      <h3 className="font-display text-xl text-foreground">{cat.name}</h3>
+      {cat.veg && <Leaf className="w-4 h-4 text-primary" />}
     </div>
-    {cat.note && <p className="text-sm text-muted-foreground mb-4 italic">{cat.note}</p>}
-    {!cat.note && <div className="border-b border-primary/30 mb-5 mt-1" />}
-    <div className="space-y-4">
+    {cat.note && <p className="text-xs text-muted-foreground mb-3 italic">{cat.note}</p>}
+    {!cat.note && <div className="border-b border-primary/30 mb-3 mt-1" />}
+    <div className="space-y-2.5">
       {cat.items.map((item) => (
-        <div key={item.name} className="flex justify-between gap-3">
+        <div key={item.name} className="flex justify-between gap-2">
           <div className="min-w-0">
-            <span className="font-medium text-foreground text-sm">{item.name}</span>
-            {item.desc && <p className="text-xs text-muted-foreground mt-0.5">{item.desc}</p>}
+            <span className="font-medium text-foreground text-sm leading-tight">{item.name}</span>
+            {item.desc && <p className="text-xs text-muted-foreground mt-0.5 leading-snug">{item.desc}</p>}
           </div>
           <span className="text-primary font-semibold text-sm whitespace-nowrap">{item.price}</span>
         </div>
@@ -163,22 +163,15 @@ const MenuCategoryCard = ({ cat }: { cat: MenuCategoryData }) => (
 );
 
 
-// Group categories into sections with photo breaks
-const sections = [
-  { cats: categories.slice(0, 4) },   // Appetizers + Rice + Specials
-  { cats: categories.slice(4, 6) },   // Veg & Non-Veg Entrees
-  { cats: categories.slice(6, 10) },  // Breads, Tandoor, Desserts, Drinks
-];
-
 const MenuSection = () => (
-  <section id="menu" className="py-20 bg-section-alt">
+  <section id="menu" className="py-16 bg-section-alt">
     <div className="container mx-auto px-4">
-      <div className="text-center mb-14">
+      <div className="text-center mb-10">
         <p className="text-primary font-medium tracking-[0.2em] uppercase text-sm mb-2">Our Specialties</p>
         <h2 className="font-display text-4xl md:text-5xl text-foreground">The Menu</h2>
         <p className="text-muted-foreground mt-3">Vegan options available · Served fresh daily</p>
       </div>
-      <div className="grid md:grid-cols-2 gap-x-12 gap-y-14 max-w-5xl mx-auto">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-10 max-w-6xl mx-auto">
         {categories.map((cat) => (
           <MenuCategoryCard key={cat.name} cat={cat} />
         ))}
