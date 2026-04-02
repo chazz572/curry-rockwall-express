@@ -184,7 +184,7 @@ const MenuSection = () => {
   const gridItems: React.ReactNode[] = [];
 
   categories.forEach((cat, i) => {
-    gridItems.push(<MenuCategory key={cat.name} cat={cat as any} />);
+    gridItems.push(<MenuCategoryCard key={cat.name} cat={cat} />);
 
     // After certain pairs, insert a photo
     const photo = menuPhotos.find((p) => p.afterIndex === i);
