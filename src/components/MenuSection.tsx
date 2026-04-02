@@ -178,36 +178,10 @@ const MenuSection = () => (
         <h2 className="font-display text-4xl md:text-5xl text-foreground">The Menu</h2>
         <p className="text-muted-foreground mt-3">Vegan options available · Served fresh daily</p>
       </div>
-      <div className="max-w-5xl mx-auto">
-        {/* Section 1: Appetizers */}
-        <div className="grid md:grid-cols-2 gap-x-12 gap-y-14">
-          {sections[0].cats.map((cat) => (
-            <MenuCategoryCard key={cat.name} cat={cat} />
-          ))}
-        </div>
-
-        <PhotoBanner images={[
-          { src: samosasImg, alt: "Crispy vegetable samosas with green chutney" },
-          { src: biryaniImg, alt: "Aromatic chicken biryani in a copper pot" },
-          { src: butterChickenImg, alt: "Butter chicken with fresh naan bread" },
-          { src: tandooriImg, alt: "Smoky tandoori chicken fresh from the oven" },
-        ]} />
-
-        {/* Section 2: Entrees */}
-        <div className="grid md:grid-cols-2 gap-x-12 gap-y-14">
-          {sections[1].cats.map((cat) => (
-            <MenuCategoryCard key={cat.name} cat={cat} />
-          ))}
-        </div>
-
-        <div className="my-10" />
-
-        {/* Section 3: Breads, Tandoor, Desserts, Drinks */}
-        <div className="grid md:grid-cols-2 gap-x-12 gap-y-14">
-          {sections[2].cats.map((cat) => (
-            <MenuCategoryCard key={cat.name} cat={cat} />
-          ))}
-        </div>
+      <div className="grid md:grid-cols-2 gap-x-12 gap-y-14 max-w-5xl mx-auto">
+        {categories.map((cat) => (
+          <MenuCategoryCard key={cat.name} cat={cat} />
+        ))}
       </div>
     </div>
   </section>
