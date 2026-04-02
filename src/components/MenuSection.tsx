@@ -1,8 +1,4 @@
 import { Leaf } from "lucide-react";
-import samosasImg from "@/assets/menu-samosas.jpg";
-import biryaniImg from "@/assets/menu-biryani.jpg";
-import butterChickenImg from "@/assets/menu-butter-chicken.jpg";
-import tandooriImg from "@/assets/menu-tandoori.jpg";
 
 interface MenuItemData {
   name: string;
