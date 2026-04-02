@@ -1,4 +1,8 @@
 import { Leaf } from "lucide-react";
+import samosasImg from "@/assets/menu-samosas.jpg";
+import biryaniImg from "@/assets/menu-biryani.jpg";
+import butterChickenImg from "@/assets/menu-butter-chicken.jpg";
+import tandooriImg from "@/assets/menu-tandoori.jpg";
 
 interface MenuItem {
   name: string;
@@ -140,39 +144,69 @@ const categories: MenuCategory[] = [
   },
 ];
 
-const MenuSection = () => (
-  <section id="menu" className="py-20 bg-section-alt">
-    <div className="container mx-auto px-4">
-      <div className="text-center mb-14">
-        <p className="text-primary font-medium tracking-[0.2em] uppercase text-sm mb-2">Our Specialties</p>
-        <h2 className="font-display text-4xl md:text-5xl text-foreground">The Menu</h2>
-        <p className="text-muted-foreground mt-3">Vegan options available · Served fresh daily</p>
-      </div>
-      <div className="grid md:grid-cols-2 gap-x-12 gap-y-14 max-w-5xl mx-auto">
-        {categories.map((cat) => (
-          <div key={cat.name}>
-            <div className="flex items-center gap-2 mb-1">
-              <h3 className="font-display text-2xl text-foreground">{cat.name}</h3>
-              {cat.veg && <Leaf className="w-5 h-5 text-primary" />}
-            </div>
-            {cat.note && <p className="text-sm text-muted-foreground mb-4 italic">{cat.note}</p>}
-            {!cat.note && <div className="border-b border-primary/30 mb-5 mt-1" />}
-            <div className="space-y-4">
-              {cat.items.map((item) => (
-                <div key={item.name} className="flex justify-between gap-3">
-                  <div className="min-w-0">
-                    <span className="font-medium text-foreground text-sm">{item.name}</span>
-                    {item.desc && <p className="text-xs text-muted-foreground mt-0.5">{item.desc}</p>}
-                  </div>
-                  <span className="text-primary font-semibold text-sm whitespace-nowrap">{item.price}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
+const menuPhotos = [
+  { src: samosasImg, alt: "Crispy vegetable samosas with green chutney", afterIndex: 1 },
+  { src: biryaniImg, alt: "Aromatic chicken biryani in a copper pot", afterIndex: 3 },
+  { src: butterChickenImg, alt: "Butter chicken with fresh naan bread", afterIndex: 5 },
+  { src: tandooriImg, alt: "Smoky tandoori chicken fresh from the oven", afterIndex: 7 },
+];
+
+const MenuCategory = ({ cat }: { cat: MenuCategory }) => (
+  <div>
+    <div className="flex items-center gap-2 mb-1">
+      <h3 className="font-display text-2xl text-foreground">{cat.name}</h3>
+      {cat.veg && <Leaf className="w-5 h-5 text-primary" />}
     </div>
-  </section>
+    {cat.note && <p className="text-sm text-muted-foreground mb-4 italic">{cat.note}</p>}
+    {!cat.note && <div className="border-b border-primary/30 mb-5 mt-1" />}
+    <div className="space-y-4">
+      {cat.items.map((item) => (
+        <div key={item.name} className="flex justify-between gap-3">
+          <div className="min-w-0">
+            <span className="font-medium text-foreground text-sm">{item.name}</span>
+            {item.desc && <p className="text-xs text-muted-foreground mt-0.5">{item.desc}</p>}
+          </div>
+          <span className="text-primary font-semibold text-sm whitespace-nowrap">{item.price}</span>
+        </div>
+      ))}
+    </div>
+  </div>
 );
+
+const PhotoCard = ({ src, alt }: { src: string; alt: string }) => (
+  <div className="rounded-xl overflow-hidden warm-shadow md:col-span-2 max-w-md mx-auto w-full">
+    <img src={src} alt={alt} loading="lazy" width={640} height={640} className="w-full h-64 object-cover" />
+  </div>
+);
+
+const MenuSection = () => {
+  // Build grid items: interleave category pairs with photos
+  const gridItems: React.ReactNode[] = [];
+
+  categories.forEach((cat, i) => {
+    gridItems.push(<MenuCategory key={cat.name} cat={cat as any} />);
+
+    // After certain pairs, insert a photo
+    const photo = menuPhotos.find((p) => p.afterIndex === i);
+    if (photo) {
+      gridItems.push(<PhotoCard key={photo.alt} src={photo.src} alt={photo.alt} />);
+    }
+  });
+
+  return (
+    <section id="menu" className="py-20 bg-section-alt">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-14">
+          <p className="text-primary font-medium tracking-[0.2em] uppercase text-sm mb-2">Our Specialties</p>
+          <h2 className="font-display text-4xl md:text-5xl text-foreground">The Menu</h2>
+          <p className="text-muted-foreground mt-3">Vegan options available · Served fresh daily</p>
+        </div>
+        <div className="grid md:grid-cols-2 gap-x-12 gap-y-14 max-w-5xl mx-auto">
+          {gridItems}
+        </div>
+      </div>
+    </section>
+  );
+};
 
 export default MenuSection;
